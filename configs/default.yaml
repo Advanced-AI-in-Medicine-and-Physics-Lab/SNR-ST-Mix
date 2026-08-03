@@ -1,0 +1,38 @@
+seed: 0
+device: cuda
+output_dir: outputs
+
+data:
+  sample: TENX13
+  root: /path/to/hest_data
+  patch_root: /path/to/hest_patches
+  train_fraction: 0.30
+  val_fraction: 0.20
+  num_genes: 250
+
+model:
+  backbone: vit_large_patch16_224
+  pretrained: true
+  dropout: 0.2
+
+augmentation:
+  method: snr_st_mix
+  alpha: 1.0
+  sigma: null  # null reproduces median(label distance) / 2
+  k_neighbors: 10
+  include_self: true
+
+loss_weights:
+  consistency: 0.5
+  edge: 50.0
+  correlation: 0.05
+
+training:
+  epochs: 200
+  batch_size: 8
+  num_workers: 4
+  learning_rate: 3.0e-5
+  minimum_learning_rate: 1.0e-7
+  betas: [0.9, 0.98]
+  eps: 1.0e-6
+  weight_decay: 1.0e-4
