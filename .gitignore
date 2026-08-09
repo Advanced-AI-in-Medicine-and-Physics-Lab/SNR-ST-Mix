@@ -1,0 +1,11 @@
+# Python-generated files
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Training outputs and model checkpoints
+outputs/
+checkpoints/
+*.pt
+*.pth
+*.ckpt
