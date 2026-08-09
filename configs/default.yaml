@@ -4,8 +4,8 @@ output_dir: outputs
 
 data:
   sample: TENX13
-  root: /path/to/hest_data
-  patch_root: /path/to/hest_patches
+  root: /home/hongyi/project/HEST/hest_data
+  patch_root: /home/hongyi/project/HEST/hest_patches
   train_fraction: 0.30
   val_fraction: 0.20
   num_genes: 250

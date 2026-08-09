@@ -2,12 +2,20 @@ import numpy as np
 import torch
 
 
-def pearson_loss(prediction: torch.Tensor, target: torch.Tensor, eps: float = 1e-8):
+def pearson_loss(
+    prediction: torch.Tensor,
+    target: torch.Tensor,
+    eps: float = 1e-8,
+):
     prediction = prediction - prediction.mean(dim=0, keepdim=True)
     target = target - target.mean(dim=0, keepdim=True)
+
     numerator = (prediction * target).sum(dim=0)
-    denominator = prediction.square().sum(dim=0).add(eps).sqrt()
-    denominator *= target.square().sum(dim=0).add(eps).sqrt()
+
+    prediction_norm = prediction.square().sum(dim=0).add(eps).sqrt()
+    target_norm = target.square().sum(dim=0).add(eps).sqrt()
+    denominator = prediction_norm * target_norm
+
     return -(numerator / (denominator + eps)).mean()
 
 
